@@ -82,18 +82,37 @@ section h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
 }
 
 /* Individual participant "chip" */
 .participant-chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background: #e8eaf6;
   color: #1a237e;
-  padding: 6px 10px;
+  padding: 6px 10px 6px 10px;
   border-radius: 999px;
   font-size: 0.85rem;
   border: 1px solid rgba(26, 35, 126, 0.08);
   box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  margin-bottom: 4px;
+}
+
+.delete-icon {
+  display: inline-block;
+  margin-left: 8px;
+  color: #c62828;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  user-select: none;
+}
+.delete-icon:hover {
+  color: #ff1744;
+}
 }
 
 /* Fallback when no participants */

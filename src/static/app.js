@@ -41,6 +41,31 @@ document.addEventListener("DOMContentLoaded", () => {
             const chip = document.createElement("span");
             chip.className = "participant-chip";
             chip.textContent = email;
+
+            // Add delete icon
+            const deleteIcon = document.createElement("span");
+            deleteIcon.className = "delete-icon";
+            deleteIcon.title = "Remove participant";
+            deleteIcon.innerHTML = "&#10006;";
+            deleteIcon.addEventListener("click", async (e) => {
+              e.stopPropagation();
+              if (confirm(`Remove ${email} from ${name}?`)) {
+                try {
+                  const response = await fetch(`/activities/${encodeURIComponent(name)}/remove?email=${encodeURIComponent(email)}`, {
+                    method: "POST"
+                  });
+                  const result = await response.json();
+                  if (response.ok) {
+                    fetchActivities();
+                  } else {
+                    alert(result.detail || "Failed to remove participant.");
+                  }
+                } catch (err) {
+                  alert("Failed to remove participant.");
+                }
+              }
+            });
+            chip.appendChild(deleteIcon);
             participantsListDiv.appendChild(chip);
           });
         } else {
